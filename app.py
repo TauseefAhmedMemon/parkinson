@@ -1,9 +1,10 @@
 from tensorflow import keras
 import cv2
 import numpy as np
+from fastapi import FastAPI
 app = FastAPI()
 ############ url initialization ############
-model_url="/home/hoola/code/mobilenet_parkinson/models/trained_model"
+model_url="/home/ameer/hamza/git/parkinson//models/trained_model"
 
 ############ load model ##########
 def load_model(model_url):
@@ -17,7 +18,7 @@ def parkinson(image_url):
     img=cv2.resize(file,dim)
     image=np.expand_dims(img,axis=0)
     image=image/255
-    model=keras.models.load_model("/home/hoola/code/mobilenet_parkinson/models/trained_model")
+    model=keras.models.load_model("/home/ameer/hamza/git/parkinson//models/trained_model")
     pred=model.predict(x=image, verbose=0)
     prediction=np.argmax(pred)
     if prediction ==0:
